@@ -49,14 +49,41 @@
             scene: undefined,
             camera: undefined,
             renderer: undefined,
+            elementArray: [],
+
             init: function () {
-                this.scene = new THREE.Scene();
-                this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-                var geometry = new THREE.BoxGeometry(1, 1, 1);
-                var material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
-                var cube = new THREE.Mesh(geometry, material);
-                this.scene.add(cube);
-                this.camera.position.z = 5;
+                var id = '28BFAB72C94A48E599C1CFF4A4A9C120';
+                var element = this.elementArray.filter(p => p.id === id)[0];
+                if (!element) {
+                    this.scene = new THREE.Scene();
+                    //Setting Background
+                    var loader = new THREE.CubeTextureLoader();
+                    var path = "assets/"
+                    var cubeArray = [id + "_px.jpg", id + "_nx.jpg", id + '_py.jpg', id + '_ny.jpg', id + '_pz.jpg', id + '_nz.jpg']
+                    loader.setPath(path);
+                    // var cubeArray = [id + '_px.png', id + '_nx.png', id + '_py.png', id + '_ny.png', id + '_pz.png', id + '_nz.png'];
+                    var textureCube = loader.load(cubeArray, function () {
+                        console.log("图片加载完成")
+                    })
+                    textureCube.format = THREE.RGBFormat;
+                    this.scene.background = textureCube;
+                    this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+                    // var geometry = new THREE.BoxGeometry(1, 1, 1);
+                    // var material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+                    // var cube = new THREE.Mesh(geometry, material);
+                    // this.scene.add(cube);
+                    this.camera.position.z = 5;
+                    var o1 = {
+                        id:id,
+                        scene: this.scene,
+                        camera: this.camera
+                    }
+                    this.elementArray.push(o1);
+                }
+                else{
+                    this.scene=element.scene;
+                    this.camera=element.camera;
+                }
                 if (!this.renderer) {
                     this.renderer = new THREE.WebGLRenderer();
                     document.body.appendChild(this.renderer.domElement);
@@ -64,13 +91,38 @@
             },
 
             init2: function () {
-                this.scene = new THREE.Scene();
-                this.camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
-                var geometry = new THREE.BoxGeometry(2, 1, 1);
-                var material = new THREE.MeshBasicMaterial({ color: 0xff00ff });
-                var cube = new THREE.Mesh(geometry, material);
-                this.scene.add(cube);
-                this.camera.position.z = 5;
+                var id = 'D2AC096BA64D40859E0689C176BCF0EB';
+                var element = this.elementArray.filter(p => p.id === id)[0];
+                if (!element) {
+                    this.scene = new THREE.Scene();
+                    //Setting Background
+                    var loader = new THREE.CubeTextureLoader();
+                    var path = "assets/"
+                    var cubeArray = [id + "_px.jpg", id + "_nx.jpg", id + '_py.jpg', id + '_ny.jpg', id + '_pz.jpg', id + '_nz.jpg']
+                    loader.setPath(path);
+                    // var cubeArray = [id + '_px.png', id + '_nx.png', id + '_py.png', id + '_ny.png', id + '_pz.png', id + '_nz.png'];
+                    var textureCube = loader.load(cubeArray, function () {
+                        console.log("图片加载完成")
+                    })
+                    textureCube.format = THREE.RGBFormat;
+                    this.scene.background = textureCube;
+                    this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+                    // var geometry = new THREE.BoxGeometry(1, 1, 1);
+                    // var material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+                    // var cube = new THREE.Mesh(geometry, material);
+                    // this.scene.add(cube);
+                    this.camera.position.z = 5;
+                    var o1 = {
+                        id:id,
+                        scene: this.scene,
+                        camera: this.camera
+                    }
+                    this.elementArray.push(o1);
+                }
+                else{
+                    this.scene=element.scene;
+                    this.camera=element.camera;
+                }
                 if (!this.renderer) {
                     this.renderer = new THREE.WebGLRenderer();
                     document.body.appendChild(this.renderer.domElement);
