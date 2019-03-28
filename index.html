@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset=utf-8>
+    <title>My first three.js app</title>
+    <style>
+        body {
+            margin: 0;
+        }
+
+        canvas {
+            width: 100%;
+            height: 100%
+        }
+
+        #info {
+            position: absolute;
+            padding: 10px;
+            width: 100%;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="info">
+        <span style="color:red;cursor: pointer;" id="init1">Switch Init1()</span>
+        <span style="color:wheat;margin:0px 10px;">|</span>
+        <span style="color:red;cursor: pointer;" id="init2">Switch Init2()</span>
+    </div>
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
+    <script src="https://cdn.bootcss.com/three.js/r83/three.js"></script>
+
+    <script>
+        $(function () {
+            demo.init();
+            demo.render();
+            $("#init1").click(function () {
+                demo.init();
+            })
+
+            $("#init2").click(function () {
+                demo.init2();
+            })
+        })
+
+        var demo = {
+            scene: undefined,
+            camera: undefined,
+            renderer: undefined,
+            init: function () {
+                this.scene = new THREE.Scene();
+                this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+                var geometry = new THREE.BoxGeometry(1, 1, 1);
+                var material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+                var cube = new THREE.Mesh(geometry, material);
+                this.scene.add(cube);
+                this.camera.position.z = 5;
+                if (!this.renderer) {
+                    this.renderer = new THREE.WebGLRenderer();
+                    document.body.appendChild(this.renderer.domElement);
+                }
+            },
+
+            init2: function () {
+                this.scene = new THREE.Scene();
+                this.camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
+                var geometry = new THREE.BoxGeometry(2, 1, 1);
+                var material = new THREE.MeshBasicMaterial({ color: 0xff00ff });
+                var cube = new THREE.Mesh(geometry, material);
+                this.scene.add(cube);
+                this.camera.position.z = 5;
+                if (!this.renderer) {
+                    this.renderer = new THREE.WebGLRenderer();
+                    document.body.appendChild(this.renderer.domElement);
+                }
+            },
+
+            render: function () {
+                requestAnimationFrame(demo.render)
+                demo.renderer.setSize(window.innerWidth, window.innerHeight);
+                demo.renderer.render(demo.scene, demo.camera);
+            }
+        }
+
+
+    </script>
+</body>
+
+</html>
