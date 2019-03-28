@@ -16,7 +16,6 @@
 
         #info {
             position: absolute;
-            padding: 10px;
             width: 100%;
             text-align: center;
         }
@@ -29,6 +28,7 @@
         <span style="color:wheat;margin:0px 10px;">|</span>
         <span style="color:red;cursor: pointer;" id="init2">Switch Init2()</span>
     </div>
+    <script src="/node_modules/js-cache/bundle/cache.js"></script> 
     <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
     <script src="https://cdn.bootcss.com/three.js/r83/three.js"></script>
 
@@ -53,7 +53,7 @@
 
             init: function () {
                 var id = '28BFAB72C94A48E599C1CFF4A4A9C120';
-                var element = this.elementArray.filter(p => p.id === id)[0];
+                var element = cache.get(id);
                 if (!element) {
                     this.scene = new THREE.Scene();
                     //Setting Background
@@ -74,11 +74,10 @@
                     // this.scene.add(cube);
                     this.camera.position.z = 5;
                     var o1 = {
-                        id:id,
                         scene: this.scene,
                         camera: this.camera
                     }
-                    this.elementArray.push(o1);
+                    cache.set(id,o1)
                 }
                 else{
                     this.scene=element.scene;
@@ -92,7 +91,7 @@
 
             init2: function () {
                 var id = 'D2AC096BA64D40859E0689C176BCF0EB';
-                var element = this.elementArray.filter(p => p.id === id)[0];
+                var element =cache.get(id);
                 if (!element) {
                     this.scene = new THREE.Scene();
                     //Setting Background
@@ -113,11 +112,10 @@
                     // this.scene.add(cube);
                     this.camera.position.z = 5;
                     var o1 = {
-                        id:id,
                         scene: this.scene,
                         camera: this.camera
                     }
-                    this.elementArray.push(o1);
+                    cache.set(id,o1)
                 }
                 else{
                     this.scene=element.scene;
